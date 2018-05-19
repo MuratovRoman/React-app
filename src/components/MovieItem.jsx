@@ -7,7 +7,8 @@ export default class MovieItem extends React.Component {
 
     this.state = {
       show: false,
-      like: false
+      like: false,
+      favourite: false
     };
   }
 
@@ -41,6 +42,33 @@ export default class MovieItem extends React.Component {
         />
         <div className="card-body">
           <h6 className="card-title">{item.title}</h6>
+          {this.state.favourite ? (
+            <button
+              className="btn btn-warning" 
+              onClick={event => {
+                this.setState({
+                  favourite: false
+                });
+                this.props.removeFavourite();
+              }}
+            >
+              UnFavourite
+            </button>
+          ) : (
+              <button
+                className="btn btn-primary"
+                onClick={event => {
+                  this.setState({
+                    favourite: true
+                  });
+                  this.props.addFavourite();
+                }}
+              >
+                Favourite
+              </button>
+          )}
+          
+          
           <div className="d-flex justify-content-between align-items-center">
             <p className="mb-0">Rating: {item.vote_average}</p>
             {this.state.like ? (

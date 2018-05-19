@@ -23,6 +23,8 @@ class MovieList extends React.Component {
                 item={item}
                 addLike={this.props.addLike}
                 unLike={this.props.unLike}
+                addFavourite={this.props.addFavourite}
+                removeFavourite={this.props.removeFavourite}
               />
             </div>
           );
@@ -36,12 +38,17 @@ const LikeCounts = props => {
   console.log("LikeCounts props", props);
   return <p>Количество лайков: {props.counts}</p>;
 };
+
+const FavouriteCounts = props => {
+  return <p>Количество избранных фильмов: {props.favourites}</p>;
+};
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      counts: 0
+      counts: 0,
+      favourites: 0
     };
   }
 
@@ -58,11 +65,30 @@ class App extends React.Component {
       counts: this.state.counts - 1
     });
   };
+
+  addFavourite = () => {
+    this.setState({
+      favourites: this.state.favourites + 1
+    });
+  };
+
+  removeFavourite = () => {
+    this.setState({
+      favourites: this.state.favourites - 1
+    });
+  };
+
   render() {
     return (
       <div className="container">
         <LikeCounts counts={this.state.counts} />
-        <MovieList addLike={this.addLike} unLike={this.unLike} />
+        <FavouriteCounts favourites={this.state.favourites} />
+        <MovieList
+          addLike={this.addLike}
+          unLike={this.unLike}
+          addFavourite={this.addFavourite}
+          removeFavourite={this.removeFavourite}
+        />
       </div>
     );
   }

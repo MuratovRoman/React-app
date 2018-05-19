@@ -28,6 +28,7 @@
   },
   "homepage": "http://epodgaetskiy.github.io/reactwarriors-workshop",
   "devDependencies": {
+    "ajv": "^6.0.0",
     "gh-pages": "^1.1.0"
   }
 }
